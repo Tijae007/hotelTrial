@@ -1,0 +1,166 @@
+{% extends 'frontend/base2.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+{% block title%}
+Home 
+{% endblock %}
+
+{% block content %}
+
+<main>
+	<section class="hero_single version_2">
+		<div class="wrapper">
+			<div class="container">
+				<h3>Book unique experiences</h3>
+				<p>Explore top rated hotels and experiences in Lagos</p>
+				<form method="GET"  >
+					<div class="row no-gutters custom-search-input-2">
+						<div class="col-lg-3">
+							<select class="wide">
+								<option>No of Rooms</option>	
+								<option>1</option>	
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+							</select>
+							<!-- <div class="panel-dropdown">
+								<a href="#"> No of Rooms<span class="qtyTotal">1</span></a>
+								<div class="panel-dropdown-content">
+									<!-- Quantity Buttons -->
+									<!-- <div class="qtyButtons">
+										<label>No of Rooms</label>
+										<input type="text" name="qtyInput" value="1">
+									</div> -->
+									
+								<!-- </div>
+							</div> --> 
+						</div>
+						<div class="col-lg-3">
+									<!-- <input class="form-control" type="text" placeholder="Room Type"> -->
+									
+							<select class="wide">
+								<option>Room Type</option>	
+								<option>Single Room</option>
+								<option>Double Room</option>
+								<option>Suite Room</option>
+							</select>
+						</div>
+
+						
+						<div class="col-lg-2">
+							<div class="form-group">
+								<input class="form-control" type="number" placeholder="MinPrice">
+								<!-- <i class="icon_pin_alt"></i> -->
+							</div>
+						</div>
+						<div class="col-lg-2">
+							<div class="form-group">
+								<input class="form-control" type="number" placeholder="MaxPrice">
+								<!-- <i class="icon_pin_alt"></i> -->
+							</div>
+						</div>
+						<div class="col-lg-2">
+							<input type="submit" class="btn_search" value="Search">
+						</div>
+					</div>
+					<!-- /row -->
+					{% csrf_token %}
+				</form>
+				{% for obj in filter.qs %}
+        			{{ obj.cat_id }} - ${{ obj.price }}<br/>
+    			{% endfor %}
+			</div>
+		</div>
+	</section>
+	<!-- /hero_single -->
+
+	<!-- dashboard section -->
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <aside class="col-lg-3" style="background-color:cornflowerblue;">
+                        <div class="custom-search-input-2 inner-2">
+                            <div class="form-group">
+                                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                                    <a class="nav-link" href="{%url 'backend:dashboard' %}">
+                                    <i class="fa fa-fw fa-dashboard"></i>
+                                    <span class="nav-link-text">Dashboard</span>
+                                    </a>
+                                </li>
+                            </div>
+                            <div class="form-group">
+                                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add listing">
+                                    <a class="nav-link" href="{%url 'backend:add_listing' %}">
+                                      <i class="fa fa-fw fa-plus-circle"></i>
+                                      <span class="nav-link-text">Add listing</span>
+                                    </a>
+                                  </li> 
+                            </div>
+                            <div class="form-group">
+                                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add listing">
+                                    <a class="nav-link" href="{%url 'backend:listings' %}">
+                                      <i class="fa fa-fw fa-plus-circle"></i>
+                                      <span class="nav-link-text">My Listing</span>
+                                    </a>
+                                  </li> 
+                            </div>
+                            <div class="form-group">
+                                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add listing">
+                                    <a class="nav-link" href="{%url 'backend:blog_form' %}">
+                                      <i class="fa fa-fw fa-plus-circle"></i>
+                                      <span class="nav-link-text">Add Blog</span>
+                                    </a>
+                                  </li> 
+                            </div>
+                            <div class="form-group">
+                                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add listing">
+                                    <a class="nav-link" href="{% url 'backend:show_post2' %}">
+                                      <i class="fa fa-fw fa-plus-circle"></i>
+                                      <span class="nav-link-text">View Blosg</span>
+                                    </a>
+                                  </li> 
+                            </div>
+                            <div>
+                                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My listings">
+                                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMyProfile" data-parent="#mylistings">
+                                      <i class="fa fa-fw fa-user"></i>
+                                      <span class="nav-link-text">My Profile</span>
+                                    </a>
+                                    <ul class="sidenav-second-level collapse" id="collapseMyProfile">
+                                      <li>
+                                        <a href="{%url 'backend:user_profile' %}">View My Profile </a>
+                                      </li>
+                                            <li>
+                                        <a href="{%url 'backend:edit_form' %}">Edit My Profile </a>
+                                      </li>
+                                            <li>
+                                        <a href="{%url 'backend:pass_form' %}">Change Password</a>
+                                      </li>
+                                    </ul>
+                                  </li>
+                            </div>
+                        </div>                  
+                </aside>
+                        <!-- /aside -->
+                        
+                            
+                        
+                        <div class="col-lg-9">
+                            <div class="isotope-wrapper">
+                                <div class="row">
+                                   
+                                </div>
+                                <!-- /row -->
+                            </div>
+                        </div>
+                        <!-- /isotope-wrapper -->
+            </div>
+        </div>
+    </section>
+	
+	<!--/call_section-->
+</main>
+<!-- /main -->
+
+{% endblock %}

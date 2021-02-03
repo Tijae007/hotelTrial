@@ -1,0 +1,58 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+{% block title%}
+Filtered Result
+{% endblock %}
+
+{% block content %}
+    <main>
+        <section class="hero_in general">
+            <div class="wrapper">
+                <div class="container">
+                    <h1 class="fadeInUp"><span></span>Galaxy Hotels</h1>
+                </div>
+            </div>
+        </section>
+        <!--/hero_in-->
+    
+        <h2>Result for your filtered search: </h2>
+
+        <div class="col-lg-9">
+            <div class="isotope-wrapper">
+                <div class="row">
+                    
+                        {% for a in filter.qs %}
+                                <div class="col-md-6 isotope-item popular">
+                                    <div class="box_grid" style="height: 700px;">
+                                        <figure>
+                                            <a href="{% url 'frontend:hotel_detail' a.id %}" class="wish_bt"></a>
+                                            <a href="{% url 'frontend:hotel_detail' a.id %}"><img src="{{ a.post_img }}" class="img-fluid" alt="" width="800" height="533"><div class="read_more"><span>Read more</span></div></a>
+                                        </figure>
+                                        <div class="wrapper">
+                                            <div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></div>
+                                            <h3><a href="{% url 'frontend:hotel_detail' a.id %}">{{ a.pst_title }}</a></h3>
+                                            <p>{{ a.content|truncatewords:20 }}</p>
+                                            <span class="price">From <strong>N{{ a.price }}</strong> /per person</span>
+                                        </div>
+                                        <ul>
+                                            <li><i class="ti-eye"></i> 164 views</li>
+                                            <li><div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div></li>
+                                            <li><p>Posted By Agent:{{ a.user.first_name }}</li>
+                                            {% for c in a.cat_id.all %}
+                                                
+                                                <li><a href="{% url 'frontend:post_from_cat' c.id %}">{{ c.cat_name }}</a></p></li>
+                                            {% endfor %}
+                                                <li><p>Time:{{a.date|date:'H:ma' }}</p></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                        {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+  
+    </main>
+{% endblock %}

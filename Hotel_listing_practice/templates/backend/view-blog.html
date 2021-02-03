@@ -1,0 +1,66 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+{% block title%}
+View-Blog
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Add Blog</li>
+      </ol>
+		<div class="box_general padding_bottom">
+			<div class="header_box version_2">
+                <div class="row">
+                    <h2>View Blogs</h2>
+                        <table class="table table-bordered">
+                            <tr>
+                            <th>S/N</th>
+                            <th>Post Title</th>
+                            <th>Post Content</th>
+                            <th>Post Image</th>
+                            <th>Date</th>
+                            <th>Posted By</th>
+                            <!-- <th>Category</th> -->
+                            <th colspan="3">Action</th>
+                            </tr>
+                
+                            {% if list %}
+                            {% for l in list %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ l.blg_title }}</td>
+                                    <td>{{ l.blg_content|truncatewords:30 }}</td>
+                                    <td><img src="{{ l.blog_img }}" width="50" height="50" alt=""></td>
+                                    <td>{{ l.date  }}</td>
+                                    <td>{{ l.user.username  }}</td>
+                                    <!-- <td>
+                                        {% for c in l.cat_id.all %}
+                                            {{ c.cat.cat_name}}
+                                        {% endfor %}
+                                    </td> -->
+                                    <td>
+                                        <a href="{% url 'backend:edit_blog' l.id %}">Edit</a>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'backend:view_blogdetails' l.id %}">View</a>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'backend:delete_post' l.id %}">Delete</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            {% endif %}    
+                        </table>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+{% block title%}
+Add-Blog
+{% endblock %}
+
+{% block content %}
+
+ <!-- /Navigation-->
+ 
+{% if post.instance.pk %}
+<h2>Edit Post</h2>
+{% else %}
+<h2>Add Blog</h2>
+{% endif %}
+
+<!-- /Navigation-->
+<div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Add Blog</li>
+      </ol>
+		<div class="box_general padding_bottom">
+			<div class="header_box version_2">
+                <div class="row">
+                    <form method="post" enctype="multipart/form-data">
+                        {{ blog.as_p }}
+                        {% csrf_token %}
+                        {% if blog.instance.pk %}
+                            <button type="submit" class="btn btn-warning">Edit Post</button>
+                        {% else %}
+                            <button type="submit" class="btn btn-warning">Add Post</button>
+                        {% endif %}
+
+                    </form>
+                </div>
+            </div>
+        </div>
+{% endblock %}

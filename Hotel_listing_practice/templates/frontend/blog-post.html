@@ -1,0 +1,102 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+{% block title%}
+Single Blog Post
+{% endblock %}
+
+{% block content %}
+	<main>
+		<section class="hero_in general">
+			<div class="wrapper">
+				<div class="container">
+					<h1 class="fadeInUp"><span></span>Galaxy blog</h1>
+				</div>
+			</div>
+		</section>
+		<!--/hero_in-->
+
+
+
+		<div class="container margin_60_35">
+			<div class="row">
+				{% if sipst %}
+					<div class="col-lg-9">
+						<div class="bloglist singlepost">
+							<p><img alt="" class="img-fluid" src="{{ sipst.blog_img }}" style="width: 500px; height: 500px;"></p>
+							<h1>{{ sipst.blg_title }}</h1>
+							<div class="postmeta">
+								<ul>
+									<li><a href="#"><i class="icon_folder-alt"></i> Collections</a></li>
+									<li><a href="#"><i class="icon_clock_alt"></i> {{sipst.date|date:'H:i:a' }}</a></li>
+									<li><a href="#"><i class="icon_pencil-edit"></i> {{ sipst.user.first_name }}</a></li>
+									<!-- <li><a href="#"><i class="icon_comment_alt"></i> (14) Comments</a></li> -->
+								</ul>
+							</div>
+							<!-- /post meta -->
+							<div class="post-content">
+								{{ sipst.blg_content }}
+							</div>
+							<!-- /post -->
+						</div>
+					<!-- /single-post -->
+				{% endif %}
+					<p></p>
+					<p></p>
+					<div id="comments">
+						<h5>Comments</h5>
+						
+						
+							{% for comment in comm %}
+								<ul>
+									<li>
+										<div class="comment_right clearfix">
+											<div class="comment_info">
+												By <a href="#">{{ comment.user_name}}</a><span>|</span>{{ comment.timestamp|timesince}} ago
+											</div>
+											<p>
+											{{ comment.comment_content}}
+											</p>
+										</div>
+									</li>
+								</ul>
+							{% endfor %}
+						
+					</div>
+
+					<hr>
+
+				{% if request.user.is_authenticated %}
+
+					{% if sipst %}
+						<h5>Leave a Comment</h5>
+						<form method="POST" action="" class="commenting-form">
+						{% csrf_token %}
+
+							
+							<div class="form-group"> 
+								{{ form.as_p }}
+							</div>
+							
+							<div class="form-group">
+								<button type="submit" class="btn_1 rounded add_bottom_30"> Submit</button>
+							</div>
+						</form>
+					{% endif %}
+
+				{% endif %}
+				</div>
+				<!-- /col -->
+
+				{% include 'frontend/blog_search.html' %}
+				
+				<!-- /aside -->
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</main>
+	<!--/main-->
+	
+{% endblock %}

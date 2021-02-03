@@ -1,0 +1,100 @@
+{% extends 'backend/newbase.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+{% block title%}
+Blog
+{% endblock %}
+
+{% block content %}
+	
+	<main>
+		<section class="hero_in general">
+			<div class="wrapper">
+				<div class="container">
+					<h1 class="fadeInUp"><span></span>Galaxy blog</h1>
+				</div>
+			</div>
+		</section>
+		<!--/hero_in-->
+
+		<div class="container margin_60_35">
+				<div class="row">
+					<div class="col-lg-9">
+						{% if person_page_obj %}
+							{% for b in person_page_obj %}
+									<article class="blog wow fadeIn">
+										<div class="row no-gutters">
+											<div class="col-lg-5">
+												<figure>
+													<a href="{%url 'frontend:blog_post' b.id %}">
+														<img src="{{ b.blog_img }}" alt="" style="height: auto; width: 100%;">
+														<div class="preview"><span>Read more</span></div>
+													</a>
+												</figure>
+											</div>
+											<div class="col-lg-5" style="margin-left: 30px;">
+												<div class="post_info">
+													<small>{{b.date }}</small>
+													<h3><a href="{%url 'frontend:blog_post' b.id %}">{{ b.blg_title }}</a></h3>
+													<p>{{ b.blg_content|truncatewords:30 }}</p>
+													<ul>
+													
+														<li>
+															<div class="thumb"><img src="" alt="" width="60" class="rounded-circle"></div> {{ b.user.first_name }}
+														</li>
+													
+														<!-- <li><i class="icon_comment_alt"></i> 20</li> -->
+													</ul>
+												</div>
+											</div>
+										</div>
+									</article>
+							{% endfor %}
+						{% endif %}
+						<!-- /article -->
+					</div>
+					{% include 'frontend/blog_search.html' %}
+				</div>	
+			
+			
+			
+		</div>
+					
+			
+		
+
+			<div>
+					<nav aria-label="...">
+						<ul class="pagination pagination-sm">
+							{% if person_page_obj.has_previous %}
+								<li>
+									<a class="page-link" href="?page=1">&laquo; First</a>
+									<a class="page-link" href="?page={{ person_page_obj.previous_page_number }}"> Previous</a>
+								</li>
+							{% endif %}
+
+							<span class="current">
+								Page {{ person_page_obj.number}} of {{person_page_obj.paginator.num_pages}}.
+							</span>
+							
+							{% if person_page_obj.has_next %}
+								<li >
+									<a class="page-link" href="?page={{ person_page_obj.next_page_number }}">Next</a>
+									<a class="page-link" href="?page={{ person_page_obj.paginator.num_pages }}">&laquo; Last</a>
+								</li>
+							{% endif %}
+						</ul>
+					</nav>
+					<!-- /pagination -->
+			</div>
+				<!-- /col -->
+
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</main>
+	<!--/main-->
+	
+
+{% endblock %}

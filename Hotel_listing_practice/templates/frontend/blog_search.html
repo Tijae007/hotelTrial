@@ -1,0 +1,43 @@
+<aside class="col-lg-3">
+    <div class="widget">
+        <form action="{% url 'search' %}"  class="search-form">
+            <div class="form-group">
+                <input type="text" name="q" id="search" class="form-control" placeholder="Search...">
+            </div>
+            <button type="submit" id="submit" class="btn_1 rounded"> Search</button>
+        </form>
+    </div>
+    <!-- /widget -->
+    <div class="widget">
+        <div class="widget-title">
+            <h4>Recent Posts</h4>
+        </div>
+        {% for b in most_recent %}
+            <ul class="comments-list">
+                <li>
+                    <div class="alignleft">
+                        <a href="{%url 'frontend:blog_post' b.id %}"><img src="{{ b.blog_img}}" alt="" style="width: 100px; height: 100px;"></a>
+                    </div>
+                    <small>{{b.date}}</small>
+                    <h3><a href="{%url 'frontend:blog_post' b.id %}" title="">{{ b.blg_title }}</a></h3>
+                </li>
+                
+            </ul>
+        {% endfor %}
+    </div>
+    <!-- /widget -->
+    <!-- <div class="widget">
+        <div class="widget-title">
+            <h4>Blog Categories</h4>
+        </div>
+        <ul class="cats">
+            <li><a href="#">Admissions <span>(12)</span></a></li>
+            <li><a href="#">News <span>(21)</span></a></li>
+            <li><a href="#">Events <span>(44)</span></a></li>
+            <li><a href="#">Focus in the lab <span>(31)</span></a></li>
+        </ul>
+    </div> -->
+    <!-- /widget -->
+    
+</aside>
+<!-- /aside -->

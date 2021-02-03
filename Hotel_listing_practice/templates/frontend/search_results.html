@@ -1,0 +1,59 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+{% block title%}
+Search Result
+{% endblock %}
+
+
+
+{% block content %}
+    <main>
+        <section class="hero_in general">
+            <div class="wrapper">
+                <div class="container">
+                    <h1 class="fadeInUp"><span></span>Galaxy Blog</h1>
+                </div>
+            </div>
+        </section>
+        <!--/hero_in-->
+    
+        <h2>Result for your search: </h2>
+
+        <div class="container margin_60_35">
+            <div class="row">
+                <div class="col-lg-9">
+                    {% for t in queryset %}
+                                <article class="blog wow fadeIn">
+                                    <div class="row no-gutters">
+                                        <div class="col-lg-5">
+                                            <figure>
+                                                <a href="{%url 'frontend:blog_post' t.id %}"><img src="{{ t.blog_img }}" alt="" style="height: 250px; width: 250px;">
+                                                    <div class="preview"><span>Read more</span></div>
+                                                </a>
+                                            </figure>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div class="post_info">
+                                                <small>{{t.date }}</small>
+                                                <h3><a href="{%url 'frontend:blog_post' t.id %}">{{ t.blg_title }}</a></h3>
+                                                <p>{{ t.blg_content|truncatewords:30 }}</p>
+                                                <ul>
+                                                    <li>
+                                                        <div class="thumb"><img src="#" alt=""></div> {{ t.user.first_name }}
+                                                    </li>
+                                                    <!-- <li><i class="icon_comment_alt"></i> 20</li> -->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                        {% endfor %}
+                    
+                    <!-- /article -->
+                </div>
+            </div>	      
+    </div>
+    </main>
+{% endblock %}

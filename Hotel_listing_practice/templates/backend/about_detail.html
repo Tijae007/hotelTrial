@@ -1,0 +1,58 @@
+{% extends 'backend/newbase.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+{% block title%}
+About-details
+{% endblock %}
+
+{% block content %}
+
+	<main>
+		
+		<section class="hero_in general">
+			<div class="wrapper">
+				<div class="container">
+					<h1 class="fadeInUp"><span></span>About Panagea</h1>
+				</div>
+			</div>
+		</section>
+		<!--/hero_in-->
+		
+		
+        
+
+		<div class="bg_color_1">
+			<div class="container margin_80_55">
+				{% if det%}
+					<div class="main_title_2">
+						<span><em></em></span>
+						<h2>{{ det.pst_title}}</h2>
+						<p>{{ det.pst_name}}</p>
+					</div>
+					<div class="row justify-content-between">
+						<div class="col-lg-6 wow" data-wow-offset="150">
+							<figure class="block-reveal">
+								<div class="block-horizzontal"></div>
+								<img src="{{ det.profile_img }}" class="img-fluid" alt="">
+							</figure>
+						</div>
+						<div class="col-lg-5">
+							<p>{{ det.content }}</p>
+
+						</div>
+					</div>
+				{% endif %}
+				<!--/row-->
+			</div>
+			<!--/container-->
+		</div>
+		<!--/bg_color_1-->
+
+		
+		</div>
+		<!--/container-->
+	</main>
+	<!--/main-->
+	
+{% endblock %}

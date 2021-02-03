@@ -1,0 +1,98 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+{% block title%}
+Reviews
+{% endblock %}
+
+{% block content %}
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Reviews</li>
+      </ol>
+		<div class="box_general">
+			<div class="header_box">
+				<h2 class="d-inline-block">Reviews List</h2>
+				<div class="filter">
+					<select name="orderby" class="selectbox">
+						<option value="Any time">Any time</option>
+						<option value="Latest">Latest</option>
+						<option value="Oldest">Oldest</option>
+					</select>
+				</div>
+			</div>
+			<div class="list_general reviews">
+				<ul>
+					<!-- {% if rlist %}
+						{% for h in rlist %}
+							<li>
+								<span>{{ h.timestamp}}</span>
+								<span class="rating"><i class="fa fa-fw fa-star yellow"></i><i class="fa fa-fw fa-star yellow"></i><i class="fa fa-fw fa-star yellow"></i><i class="fa fa-fw fa-star yellow"></i><i class="fa fa-fw fa-star"></i></span>
+								<figure><img src="{{ h.post_img }}" alt=""></figure>
+								<h4>{{ h.post}} <small>by {{ h.user_name }}</small></h4>
+								
+								<p>{{ h.review_content|truncatewords:30 }}.</p>
+								<p class="inline-popups"><a href="#modal-reply" data-effect="mfp-zoom-in" class="btn_1 gray"><i class="fa fa-fw fa-reply"></i> Reply to this review</a></p>
+							</li>
+						{% endfor %}
+					{% endif %} -->
+					
+				</ul>
+			</div>
+		</div>
+		<!-- /box_general-->
+		<nav aria-label="...">
+			<ul class="pagination pagination-sm add_bottom_30">
+				<li class="page-item disabled">
+					<a class="page-link" href="#" tabindex="-1">Previous</a>
+				</li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item">
+					<a class="page-link" href="#">Next</a>
+				</li>
+			</ul>
+		</nav>
+		<!-- /pagination-->
+	  </div>
+	  <!-- /container-fluid-->
+   	</div>
+    <!-- /container-wrapper-->
+	<footer class="sticky-footer">
+		<div class="container">
+		  <div class="text-center">
+			<small>Copyright © PANAGEA 2020</small>
+		  </div>
+		</div>
+
+		
+	  </footer>
+	  <!-- Scroll to Top Button-->
+	  <a class="scroll-to-top rounded" href="#page-top">
+		<i class="fa fa-angle-up"></i>
+	  </a>
+	  
+	  <!-- Reply to review popup -->
+	<div id="modal-reply" class="white-popup mfp-with-anim mfp-hide">
+		<div class="small-dialog-header">
+			<h3>Reply to review</h3>
+		</div>
+		<div class="message-reply margin-top-0">
+			<div class="form-group">
+				<textarea cols="40" rows="3" class="form-control"></textarea>
+			</div>
+			<button class="btn_1">Reply</button>
+		</div>
+	</div>
+
+	  
+{% endblock %}
+
+	

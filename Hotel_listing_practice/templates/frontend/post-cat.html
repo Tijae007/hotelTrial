@@ -1,0 +1,159 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+{% block title%}
+Hotel by User
+{% endblock %}
+
+{% block content %}
+	<main>
+		
+		<section class="hero_in hotels">
+			<div class="wrapper">
+				<div class="container">
+					<h1 class="fadeInUp"><span></span>Galaxy Hotels</h1>
+				</div>
+			</div>
+		</section>
+		<!--/hero_in-->
+		
+		<div class="filters_listing sticky_horizontal">
+			<div class="container">
+				<ul class="clearfix">
+					<li>
+						<div class="switch-field">
+							<input type="radio" id="all" name="listing_filter" value="all" checked data-filter="*" class="selected">
+							<label for="all">All</label>
+							<input type="radio" id="popular" name="listing_filter" value="popular" data-filter=".popular">
+							<label for="popular">Popular</label>
+							<input type="radio" id="latest" name="listing_filter" value="latest" data-filter=".latest">
+							<label for="latest">Latest</label>
+						</div>
+					</li>
+					<li>
+						<div class="layout_view">
+							<a href="#0" class="active"><i class="icon-th"></i></a>
+							<a href="hotels-list-sidebar.html"><i class="icon-th-list"></i></a>
+						</div>
+					</li>
+					<li>
+						<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /filters -->
+		
+		<div class="collapse" id="collapseMap">
+			<div id="map" class="map"></div>
+		</div>
+		<!-- End Map -->
+
+		<div class="container margin_60_35">
+			<div class="row">
+				
+				<!-- /aside -->
+				
+                <section id="sectionTitle">
+                    <div class="pageTitle">
+                    {% if posts %}
+                        
+                            <h3>{{ counts }} Post From {{ cat.cat_name }} Category </h3>
+                        
+                    {% endif %}
+                    </div>
+                </section>
+		
+				<div class="col-lg-9">
+					<div class="isotope-wrapper">
+						{% if posts %}
+                            {% for p in posts %}
+								<div class="row">
+									<div class="col-md-6 isotope-item popular">
+										<div class="box_grid">
+											<figure>
+												<a href="{% url 'frontend:hotel_detail' p.id %}" class="wish_bt"></a>
+												<a href="{% url 'frontend:hotel_detail' p.id %}"><img src="{{ p.post_img }}" class="img-fluid" alt="" width="800" height="533"><div class="read_more"><span>Read more</span></div></a>
+											</figure>
+											<div class="wrapper">
+												<div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></div>
+												<h3><a href="{% url 'frontend:hotel_detail' p.id %}">{{ p.pst_title }}</a></h3>
+												<p>{{ p.content|truncatewords:30 }}</p>
+												<span class="price">From <strong>{{ p.price }}</strong> /per person</span>
+											</div>
+											<ul>
+												<li><i class="ti-eye"></i> 164 views</li>
+												<li><div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div></li>
+												<li><p>Posted By Agent:{{ p.user.first_name }}</a>.</p></li>
+												<li><p>Time:{{p.date|date:'H:ma' }}</p></li>
+											</ul>
+										</div>
+									</div>
+									<!-- /box_grid -->
+									
+									<!-- /box_grid -->
+								</div>
+							{% endfor %}
+						{% endif %}
+						<!-- /row -->
+					</div>
+				</div>
+				<!-- /isotope-wrapper -->
+			
+				<nav aria-label="..." style="position: fixed bottom: ;;">
+					<ul class="pagination pagination-sm">
+						<li class="page-item disabled">
+							<a class="page-link" href="#" tabindex="-1">Previous</a>
+						</li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item">
+							<a class="page-link" href="#">Next</a>
+						</li>
+					</ul>
+				</nav>
+				</div>
+				<!-- /col -->
+			</div>		
+		</div>
+		<!-- /container -->
+		
+		<div class="bg_color_1">
+			<div class="container margin_60_35">
+				<div class="row">
+					<div class="col-md-4">
+						<a href="#0" class="boxed_list">
+							<i class="pe-7s-help2"></i>
+							<h4>Need Help? Contact us</h4>
+							<p>Cum appareat maiestatis interpretaris et, et sit.</p>
+						</a>
+					</div>
+					<div class="col-md-4">
+						<a href="#0" class="boxed_list">
+							<i class="pe-7s-wallet"></i>
+							<h4>Payments</h4>
+							<p>Qui ea nemore eruditi, magna prima possit eu mei.</p>
+						</a>
+					</div>
+					<div class="col-md-4">
+						<a href="#0" class="boxed_list">
+							<i class="pe-7s-note2"></i>
+							<h4>Cancel Policy</h4>
+							<p>Hinc vituperata sed ut, pro laudem nonumes ex.</p>
+						</a>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /bg_color_1 -->
+		
+	</main>
+	<!--/main-->
+
+	{% endblock %}
+	

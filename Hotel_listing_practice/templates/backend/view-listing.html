@@ -1,0 +1,64 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+{% block title%}
+View Listings
+{% endblock %}
+
+{% block content %}
+  <!-- /Navigation-->
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Listings</li>
+      </ol>
+		<div class="box_general">
+			<div class="header_box">
+				<h2 class="d-inline-block">Listings</h2>
+				<div class="filter">
+					<select name="orderby" class="selectbox">
+						<option value="Any time">Any time</option>
+						<option value="Latest">Latest</option>
+						<option value="Oldest">Oldest</option>
+					</select>
+				</div>
+			</div>
+			<div class="container margin_60_35">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <section id="description">
+                            <p><img alt="" class="img-fluid" src="{{ pst.post_img }}" style="width: 500px; height: 500px;"></p>
+                            <h1>{{ pst.pst_title }}</h1>
+                            <h2>Description</h2>
+                            <p>{{pst.content}}</p>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+		</div>
+		<!-- /box_general-->
+		<nav aria-label="...">
+			<ul class="pagination pagination-sm add_bottom_30">
+				<li class="page-item disabled">
+					<a class="page-link" href="#" tabindex="-1">Previous</a>
+				</li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item">
+					<a class="page-link" href="#">Next</a>
+				</li>
+			</ul>
+		</nav>
+		<!-- /pagination-->
+	  </div>
+	  <!-- /container-fluid-->
+   	</div>
+    <!-- /container-wrapper-->
+{% endblock %}

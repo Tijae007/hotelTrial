@@ -1,0 +1,281 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+{% block title%}
+Home
+{% endblock %}
+
+{% block content %}
+
+<main>
+	<section class="hero_single version_2">
+		<div class="wrapper">
+			<div class="container">
+				<h3>Book unique experiences</h3>
+				<p>Explore top rated hotels and experiences in Lagos</p>
+				<form method="GET"  >
+					<div class="row no-gutters custom-search-input-2">
+						<div class="col-lg-3">
+							<select class="wide">
+								<option>No of Rooms</option>	
+								<option>1</option>	
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+							</select>
+							<!-- <div class="panel-dropdown">
+								<a href="#"> No of Rooms<span class="qtyTotal">1</span></a>
+								<div class="panel-dropdown-content">
+									<!-- Quantity Buttons -->
+									<!-- <div class="qtyButtons">
+										<label>No of Rooms</label>
+										<input type="text" name="qtyInput" value="1">
+									</div> -->
+									
+								<!-- </div>
+							</div> --> 
+						</div>
+						<div class="col-lg-3">
+									<!-- <input class="form-control" type="text" placeholder="Room Type"> -->
+									
+							<select class="wide">
+								<option>Room Type</option>	
+								<option>Single Room</option>
+								<option>Double Room</option>
+								<option>Suite Room</option>
+							</select>
+						</div>
+
+						
+						<div class="col-lg-2">
+							<div class="form-group">
+								<input class="form-control" type="number" placeholder="MinPrice">
+								<!-- <i class="icon_pin_alt"></i> -->
+							</div>
+						</div>
+						<div class="col-lg-2">
+							<div class="form-group">
+								<input class="form-control" type="number" placeholder="MaxPrice">
+								<!-- <i class="icon_pin_alt"></i> -->
+							</div>
+						</div>
+						<div class="col-lg-2">
+							<input type="submit" class="btn_search" value="Search">
+						</div>
+					</div>
+					<!-- /row -->
+					{% csrf_token %}
+				</form>
+				{% for obj in filter.qs %}
+        			{{ obj.cat_id }} - ${{ obj.price }}<br/>
+    			{% endfor %}
+			</div>
+		</div>
+	</section>
+	<!-- /hero_single -->
+
+	
+	<div class="container container-custom margin_30_95">
+		<section class="add_bottom_45">
+			<div class="main_title_3">
+				<span><em></em></span>
+				<h2>Latest Popular Hotels and Accommodations</h2>
+				<p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+			</div>
+
+				<div class="row">
+					{% if latest %}
+						{% for l in latest%}
+							<div class="col-xl-3 col-lg-6 col-md-6">
+								<a href="{% url 'frontend:hotel_detail' l.id %}" class="grid_item">
+									<figure>
+										<div class="score"><strong>8.9</strong></div>
+										<img src="{{ l.post_img }}" class="img-fluid" style="height: 350px;">
+										<div class="info">
+											<div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></div>
+											<h3>{{ l.pst_title }}</h3>
+										</div>
+									</figure>
+								</a>
+							</div>
+						{% endfor %}
+					{% endif %}
+				</div>
+				<!-- /grid_item -->
+				
+
+	
+			<!-- <a href="#"><strong>View all (157) <i class="arrow_carrot-right"></i></strong></a> -->
+		</section>
+		<!-- /section -->
+
+	</div>
+	
+	<div class="container container-custom margin_30_95">
+		<section class="add_bottom_45">
+			<div class="main_title_3">
+				<span><em></em></span>
+				<h2>Featured Popular Hotels and Accommodations</h2>
+				<p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+			</div>
+			<div class="row">
+				{% if featured %}
+					{% for f in featured %}
+						<div class="col-xl-3 col-lg-6 col-md-6">
+							<a href="{% url 'frontend:hotel_detail' f.id %}" class="grid_item">
+								<figure>
+									<div class="score"><strong>8.9</strong></div>
+									<img src="{{ f.post_img }}" class="img-fluid" style="height: 350px;">
+									<div class="info">
+										<div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></div>
+										<h3>{{ f.pst_title }}</h3>
+									</div>
+								</figure>
+							</a>
+						</div>
+					{% endfor %}
+				{% endif %}
+			</div>
+			<!-- /row -->
+			<!-- <a href="hotels-grid-sidebar-2.html"><strong>View all (157) <i class="arrow_carrot-right"></i></strong></a> -->
+		</section>
+			<!-- /section -->
+		
+	</div>
+
+	<div class="container container-custom margin_30_95">
+		<section class="add_bottom_45">
+			<div class="main_title_3">
+				<span><em></em></span>
+					<h2>Sponsored Popular Hotels and Accommodations</h2>
+						<p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+			</div>
+			<div class="row">
+				{% if sponsored %}
+					{% for s in sponsored %}
+						<div class="col-xl-3 col-lg-6 col-md-6">
+							<a href="{% url 'frontend:hotel_detail' s.id %}" class="grid_item">
+								<figure>
+									<div class="score"><strong>8.9</strong></div>
+									<img src="{{ s.post_img }}" class="img-fluid" style="height: 350px;">
+									<div class="info">
+										<div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></div>
+										<h3>{{ s.pst_title }}</h3>
+									</div>
+								</figure>
+							</a>
+						</div>
+					{% endfor %}
+				{% endif %}
+			</div>
+					<!-- /row -->
+					<!-- <a href="hotels-grid-sidebar-2.html"><strong>View all (157) <i class="arrow_carrot-right"></i></strong></a> -->
+				</section>
+				<!-- /section -->
+	</div>
+
+	<div class="container container-custom margin_30_95">
+		<section class="add_bottom_45">
+			<div class="main_title_3">
+				<span><em></em></span>
+					<h2>Names of Agents</h2>
+						<!-- <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p> -->
+			</div>
+			<div class="row">
+				
+					{% for s in agents %}
+						<div class="col-xl-3 col-lg-6 col-md-6">
+							<!-- <a href="{% url 'frontend:hotel_detail' s.id %}" class="grid_item"> -->
+								<figure>
+									<!-- <div class="score"><strong>8.9</strong></div> -->
+									<img src="{{ s.post_img }}" class="img-fluid" style="height: 350px;">
+									<div class="info">
+										<!-- <div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></div> -->
+										<h3>{{ s.user_name }}</h3>
+									</div>
+								</figure>
+							</a>
+						</div>
+					{% endfor %}
+				
+			</div>
+					<!-- /row -->
+					<!-- <a href="hotels-grid-sidebar-2.html"><strong>View all (157) <i class="arrow_carrot-right"></i></strong></a> -->
+				</section>
+				<!-- /section -->
+	</div>
+				
+	<div class="banner mb-0">
+		<div class="wrapper d-flex align-items-center opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.3)">
+			<div>
+				<!-- <small>Adventure</small> -->
+				<h3>Your Perfect<br>Lodging Experience</h3>
+				<p>Activities and accommodations</p>
+				<!-- <a href="#" class="btn_1">Read more</a> -->
+			</div>
+		</div>
+		<!-- /wrapper -->
+	</div>
+		<!-- /banner -->
+
+	</div>
+	<!-- /container -->
+
+	<div class="bg_color_1">
+		<div class="container margin_80_55">
+			<div class="main_title_2">
+				<span><em></em></span>
+				<h3>News and Events</h3>
+				<p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+			</div>
+
+			<div class="row">
+				{% if news %}
+					{% for n in news %}
+						<div class="col-lg-6">
+							<a class="box_news" href="{%url 'frontend:blog_post' n.id %}">
+								<figure><img src="{{ n.blog_img }}" alt="">
+									<figcaption><strong>{{n.date|date:'d M' }}</strong></figcaption>
+								</figure>
+								<ul>
+									<li>{{ n.user.first_name }}</li>
+									<li></li>
+								</ul>
+								<h4>{{ n.blg_title }}</h4>
+								<p>{{ n.blg_content|truncatewords:15 }}</p>
+							</a>
+						</div>
+					{% endfor %}
+				{% endif %}
+			</div>
+				<!-- /box_news -->
+				
+				<!-- /box_news -->
+			</div>
+			<!-- /row -->
+			<!-- <p class="btn_home_align"><a href="{% url 'frontend:blog' %" class="btn_1 rounded">View all news</a></p> -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /bg_color_1 -->
+
+	<div class="call_section">
+		<div class="container clearfix">
+			<div class="col-lg-5 col-md-6 float-right wow" data-wow-offset="250">
+				<div class="block-reveal">
+					<div class="block-vertical"></div>
+					<div class="box_1">
+						<h3>Enjoy a GREAT travel with us</h3>
+						<p>Ius cu tamquam persequeris, eu veniam apeirian platonem qui, id aliquip voluptatibus pri. Ei mea primis ornatus disputationi. Menandri erroribus cu per, duo solet congue ut. </p>
+						<!-- <a href="#0" class="btn_1 rounded">Read more</a> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/call_section-->
+</main>
+<!-- /main -->
+
+{% endblock %}
