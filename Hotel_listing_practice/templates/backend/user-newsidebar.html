@@ -1,0 +1,117 @@
+{% load static %}
+
+<section class="col-md-2" class="bg-dark">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-default fixed-top" id="mainNav"> -->
+        <!-- <a class="navbar-brand" href="{%url 'backend:dashboard' %}" style="height: 36px; width: 150px;">GALAXY</a> -->
+        <!-- <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> -->
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div>
+        <ul>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="{%url 'frontend:homepage' %}">
+                <i class="fa fa-fw fa-dashboard"></i>
+                <strong><span class="nav-link-text">Dashboard</span></strong>
+            </a>
+            </li>
+            <!-- <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Messages">
+            <a class="nav-link" href="{%url 'backend:messages' %}">
+                <i class="fa fa-fw fa-envelope-open"></i>
+                <span class="nav-link-text">Comments</span>
+            </a>
+            </li> -->
+        <!-- <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Messages">
+            <a class="nav-link" href="{%url 'backend:blog_form' %}">
+                <i class="fa fa-fw fa-envelope-open"></i>
+                <span class="nav-link-text">Add Blog</span>
+            </a>
+            </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Messages">
+            <a class="nav-link" href="{% url 'backend:show_post2' %}">
+                <i class="fa fa-fw fa-envelope-open"></i>
+                <span class="nav-link-text">View Blogs</span>
+            </a>
+        </li> -->
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Listings">
+            <a class="nav-link" href="{%url 'backend:new_listings' %}">
+                <i class="fa fa-fw fa-envelope-open"></i>
+                <span class="nav-link-text">My Listings</span>
+            </a>
+        </li>
+            <!-- <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Bookings">
+            <a class="nav-link" href="{%url 'backend:bookings' %}">
+                <i class="fa fa-fw fa-calendar-check-o"></i>
+                <span class="nav-link-text">Bookings <span class="badge badge-pill badge-primary">6 New</span></span>
+            </a>
+            </li> -->
+            
+            </li>
+            <!-- <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
+            <a class="nav-link" href="{%url 'backend:reviews' %}">
+                <i class="fa fa-fw fa-star"></i>
+                <span class="nav-link-text">Reviews</span>
+            </a>
+            </li> -->
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add listing">
+            <a class="nav-link" href="{%url 'backend:add_newlisting' %}">
+                <i class="fa fa-fw fa-plus-circle"></i>
+                <span class="nav-link-text">Add listing</span>
+            </a>
+            </li>
+            
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Profile">
+                <a class="nav-link" href="{%url 'backend:user_newprofile' %}">
+                    <i class="fa fa-fw fa-envelope-open"></i>
+                    <span class="nav-link-text">My Profile</span>
+                </a>
+            </li>
+
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Edit My Profile">
+                <a class="nav-link" href="{%url 'backend:edit_newform' %}">
+                    <i class="fa fa-fw fa-envelope-open"></i>
+                    <span class="nav-link-text">Edit My Profile</span>
+                </a>
+            </li>
+
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Change Password">
+                <a class="nav-link" href="{%url 'backend:pass_newform' %}">
+                    <i class="fa fa-fw fa-envelope-open"></i>
+                    <span class="nav-link-text">Change Password</span>
+                </a>
+            </li>
+
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Chart">
+                <a class="nav-link" href="{%url 'backend:newcharts' %}">
+                    <i class="fa fa-fw fa-envelope-open"></i>
+                    <span class="nav-link-text">Charts</span>
+                </a>
+            </li>
+            
+
+            
+            <!-- <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#Components">
+                <i class="fa fa-fw fa-gear"></i>
+                <span class="nav-link-text">Components</span>
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseComponents">
+                <li>
+                <a href="">Charts</a>
+                </li>
+                
+            </ul>
+            </li> -->
+        </ul>
+
+        <ul class="navbar-nav sidenav-toggler">
+            <li class="nav-item">
+            <a class="nav-link text-center" id="sidenavToggler">
+                <i class="fa fa-fw fa-angle-left"></i>
+            </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          
+    </nav>
+</section>

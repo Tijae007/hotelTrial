@@ -8,7 +8,6 @@ from django.contrib import messages
 from frontend.models import *
 from backend.forms import *
 
-from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 
 from django.core import mail
@@ -36,7 +35,7 @@ def login_view(request):
             return redirect('frontend:homepage')
         else:
             messages.error(request, 'Username and Password do not match')
-    return render(request, 'frontend/login.html')
+    return render(request, 'frontend/login2.html')
 
 def login_userview(request):
     if request.method == 'POST':
@@ -46,7 +45,7 @@ def login_userview(request):
 
         if user is not None:
             login(request, user)
-            return redirect('frontend:homepage')
+            return redirect('backend:dashboard')
         else:
             messages.error(request, 'Username and Password do not match')
     return render(request, 'frontend/userlogin.html')
@@ -78,6 +77,17 @@ def listings(request):
     hotel_list = Hotel.objects.filter(user=request.user)
     return render(request, 'backend/listings.html', {'hlist':hotel_list})
 
+@login_required(login_url='/dashboard/')
+def new_listings(request):
+    # hotel_list = Hotel.objects.order_by('-date')
+    hotel_list = Hotel.objects.filter(user=request.user)
+    return render(request, 'backend/newlistings.html', {'hlist':hotel_list})
+
+def new_listings2(request):
+    hotel_list = Hotel.objects.order_by('-date')
+    # hotel_list = Hotel.objects.filter(user=request.user)
+    return render(request, 'backend/newlistings.html', {'hlist':hotel_list})
+
 def listings2(request):
     hotel_list = Hotel.objects.order_by('-date')
     # hotel_list = Hotel.objects.filter(user=request.user)
@@ -104,17 +114,36 @@ def add_listing(request):
     return render(request, 'backend/add-listing.html', {'listf': list_form})
 
 @login_required(login_url='/dashboard/')
+def add_newlisting(request):
+    if request.method == 'POST':
+        list_form = ListingForm(request.POST, request.FILES)
+        if list_form.is_valid():
+            listf = list_form.save(commit=False)
+            listf.user = request.user
+            listf.save()
+            # messages.success(request, 'Hotel Posted')
+    else:
+        list_form = ListingForm()
+    return render(request, 'backend/add-newlisting.html', {'listf': list_form})
+
+
+@login_required(login_url='/dashboard/')
 def user_profile(request):
     agents = UserProfile.objects.filter(user=request.user)
     return render(request, 'backend/user-profile.html', {'profile':request.user, 'agents': agents})
+
+@login_required(login_url='/dashboard/')
+def user_newprofile(request):
+    agents = UserProfile.objects.filter(user=request.user)
+    return render(request, 'backend/user-newprofile.html', {'profile':request.user, 'agents': agents})
 
 @login_required(login_url='/dashboard/')
 def charts(request):
     return render(request, 'backend/charts.html')
 
 @login_required(login_url='/dashboard/')
-def tables(request):
-    return render(request, 'backend/tables.html')
+def newcharts(request):
+    return render(request, 'backend/newcharts.html')
 
 def register_form(request):
     if request.method == 'POST':
@@ -138,6 +167,18 @@ def pass_form(request):
         pass_form = PasswordChangeForm(user=request.user)
     return render(request, 'backend/pass-form.html', {'pass_key':pass_form})
 
+def pass_newform(request):
+    if request.method == 'POST':
+        pass_form = PasswordChangeForm(data=request.POST,
+        user=request.user)
+        if pass_form.is_valid():
+            pass_form.save()
+            update_session_auth_hash(request, pass_form.user)
+            # messages.success(request, 'Password changed successfully.')
+    else:
+        pass_form = PasswordChangeForm(user=request.user)
+    return render(request, 'backend/pass-newform.html', {'pass_key':pass_form})
+
 def edit_form(request):
     if request.method == 'POST':
         edit_form = EditUserForm(request.POST, instance=request.user)
@@ -147,6 +188,16 @@ def edit_form(request):
     else:
         edit_form = EditUserForm(instance=request.user)
     return render(request, 'backend/edit-user-profile.html', {'edit_key':edit_form})
+
+def edit_newform(request):
+    if request.method == 'POST':
+        edit_form = EditUserForm(request.POST, instance=request.user)
+        if edit_form.is_valid():
+            edit_form.save()
+            # messages.success(request, 'User edited successfully.')
+    else:
+        edit_form = EditUserForm(instance=request.user)
+    return render(request, 'backend/edit-newuser-profile.html', {'edit_key':edit_form})
 
 def reset(request):
     if request.method == 'POST':
@@ -200,11 +251,20 @@ def delete_post(request, blog_id):
 def delete_hotel(request, listf_id):
     post_record = get_object_or_404(Hotel, id=listf_id)
     post_record.delete()
+    return redirect('backend:new_listings')
+
+def delete_newhotel(request, listf_id):
+    post_record = get_object_or_404(Hotel, id=listf_id)
+    post_record.delete()
     return redirect('backend:listings')
 
 def view_listingdetails(request, pk):
     post = get_object_or_404(Hotel, pk=pk)
     return render(request, 'backend/view-listing.html', {'pst':post})
+
+def view_newlistingdetails(request, pk):
+    post = get_object_or_404(Hotel, pk=pk)
+    return render(request, 'backend/view-newlisting.html', {'pst':post})
 
 def view_blogdetails(request, pk):
     single_post = get_object_or_404(Blog, pk=pk)

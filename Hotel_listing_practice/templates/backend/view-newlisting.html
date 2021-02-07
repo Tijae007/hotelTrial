@@ -1,0 +1,107 @@
+{% extends 'frontend/base2.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+{% block title%}
+Listing
+{% endblock %}
+
+
+
+<body class="fixed-nav sticky-footer" id="page-top">
+  
+    {% block content %}
+
+    <section class="hero_single version_2">
+        <div class="wrapper">
+            <div class="container">
+                <h3>Book unique experiences</h3>
+                <p>Explore top rated hotels and experiences in Lagos</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            {% if request.user.is_staff %}
+  			    {% include 'backend/admin-newsidebar.html' %}
+		    {% else %}
+				{% include 'backend/user-newsidebar.html' %}
+		    {% endif %}
+            
+            <section class="col-md-10">
+                <div class="content-wrapper">
+                    <div class="container-fluid">
+                      <!-- Breadcrumbs-->
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                          <a href="{%url 'frontend:homepage' %}">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item active">Listings</li>
+                      </ol>
+                        <div class="box_general">
+                            <div class="header_box">
+                                <h2 class="d-inline-block">Listings</h2>
+                                <div class="filter">
+                                    <select name="orderby" class="selectbox">
+                                        <option value="Any time">Any time</option>
+                                        <option value="Latest">Latest</option>
+                                        <option value="Oldest">Oldest</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="container margin_60_35">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <section id="description">
+                                            <p><img alt="" class="img-fluid" src="{{ pst.post_img }}" style="width: 500px; height: 500px;"></p>
+                                            <h1>{{ pst.pst_title }}</h1>
+                                            <h2>Description</h2>
+                                            <p>{{pst.content}}</p>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                
+                        </div>
+                       
+                      </div>
+                      <!-- /container-fluid-->
+                       </div>
+            </section>
+                <!-- /.container-wrapper-->
+        </div>
+    </div>
+    
+    {% endblock %}
+
+
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="{% url 'backend:logout_view' %}">Logout</a>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+  <script src="{% static 'backend/vendor/chart.js/Chart.js' %}"></script>
+  <script src="{% static 'backend/js/admin-charts.js' %}"></script>
+

@@ -1,0 +1,101 @@
+{% extends 'frontend/base2.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+{% block title%}
+Home 
+{% endblock %}
+
+
+
+<body class="fixed-nav sticky-footer" id="page-top">
+    <!-- Navigation-->
+    <!-- {% if request.user.is_staff %}
+        {% include 'backend/admin-sidebar.html' %}
+    {% else %}
+        {% include 'backend/user-sidebar.html' %}
+    {% endif %} -->
+  
+    {% block content %}
+
+    <section class="hero_single version_2">
+        <div class="wrapper">
+            <div class="container">
+                <h3>Book unique experiences</h3>
+                <p>Explore top rated hotels and experiences in Lagos</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            {% if request.user.is_staff %}
+  			    {% include 'backend/admin-newsidebar.html' %}
+		    {% else %}
+				{% include 'backend/user-newsidebar.html' %}
+		    {% endif %}
+            
+            <section class="col-md-10">
+                <div class="content-wrapper">
+                    <div class="container-fluid">
+                        <!-- Breadcrumbs-->
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                            <a href="{%url 'frontend:homepage' %}">Dashboard</a>
+                            </li>
+                            <li class="breadcrumb-item active">Change Password</li>
+                        </ol>
+                    </div>
+                </div>
+                        
+            
+                    <div class="col-md-6">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                        
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ pass_key.as_p }}
+                                <input type="submit" value="Change Password" class="btn btn-success">
+                        </form>
+                    </div>
+            </section>
+                <!-- /.container-wrapper-->
+        </div>
+    </div>
+    
+    {% endblock %}
+
+
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="{% url 'backend:logout_view' %}">Logout</a>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+  <script src="{% static 'backend/vendor/chart.js/Chart.js' %}"></script>
+  <script src="{% static 'backend/js/admin-charts.js' %}"></script>
+

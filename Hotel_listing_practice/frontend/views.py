@@ -72,7 +72,7 @@ def homepage(request):
         new_signup.email = email
         new_signup.save() 
 
-    return render(request, 'frontend/homepage.html', context)
+    return render(request, 'frontend/homepage2.html', context)
 
 def about(request):
     about = About.objects.all()
